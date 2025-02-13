@@ -35,11 +35,7 @@ export const ContainerName = styled.div`
     }
 `
 const ProductAll = ({images, category}) => {
-   
-    console.log(category);
-    
     const countCate = category === "All" ? images : images.filter(el => el.category === category);
-    console.log(countCate.length);
 
     return(
         <>

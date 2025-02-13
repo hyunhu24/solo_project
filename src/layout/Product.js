@@ -1,14 +1,11 @@
-import React,{useEffect, useState} from "react";
-// import Top from "../components/Top.js";
+import React, { useEffect, useContext } from "react";
 import ProductAll from "../components/ProductAll";
 import styled from "styled-components";
 import banner from "../img/banner.png";
 import TabMenu from "../components/TabMenu";
 import { images } from "../data/data";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import Footer from "../layout/Footer";
-import ItemDetail from "../components/ItemDetail";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { CategoryContext } from "../context/CategoryContext";
 
 
 
@@ -31,31 +28,30 @@ export const ProductContainer = styled.div`
 }`
 
 const Product = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    // const navigate = useNavigate();
-
-    const categoryParams = searchParams.get("category") || "All";
-    const [category, setCategory] = useState(categoryParams);
-
+    const [searchParams] = useSearchParams();
+    const { category, setCategory } = useContext(CategoryContext);
+    console.log("Header Category:", category);
+    // URL 쿼리 파라미터에서 카테고리를 읽어와 설정
     useEffect(() => {
-        if (category !== categoryParams) {
-            setSearchParams({category})
-        }
-    }, [category, categoryParams, setSearchParams]);
-
-    return(
-        <>
-            <ProductContainer>
-                <div className="bannerImg">
-                    <img src={banner}/>
-                </div>
-                <TabMenu category={category} setCategory={setCategory}/>
-                <div className="productContain">
-                    <ProductAll images={images} category={category} />
-                </div>
-            </ProductContainer>
-        </>
+      const categoryFromUrl = searchParams.get("category") || "All";
+      if (category !== categoryFromUrl) {
+        setCategory(categoryFromUrl);
+      }
+    }, []);
+  
+    return (
+      <>
+        <ProductContainer>
+          <div className="bannerImg">
+            <img src={banner} alt="배너" />
+          </div>
+          <TabMenu category={category} setCategory={setCategory} />
+          <div className="productContain">
+            <ProductAll images={images} category={category} />
+          </div>
+        </ProductContainer>
+      </>
     );
-}
+  };
 
 export default Product;

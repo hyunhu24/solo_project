@@ -28,32 +28,24 @@ export const TabContainer = styled.div`
     }
 `
 
-const TabMenu = ({category, setCategory}) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+const TabMenu = ({ category, setCategory }) => {
     const categories = ["All", "Coffee", "Burger", "Side"];
 
-
-    
    const categoryHandler = (cate) => {
         setCategory(cate);
-        setSearchParams({category: cate});
+        // URL 쿼리 파라미터 업데이트
+        window.history.pushState({}, "", `/?category=${cate}`);
    }
 
-    return(
-        <TabContainer>
-            <ul>
-                {categories.map((cate) => (
-                    <li key={cate} className={category === cate ? "active" : ""} onClick={() => categoryHandler(cate)}>{cate}</li>
-                ))}
-            </ul>
-
-                {/* <li className = {category === "All" ? "active" : ""} onClick={() => categoryHandler("All")}>All</li>
-                <li className = {category === "Coffee" ? "active" : ""} onClick={() => categoryHandler("Coffee")}>Coffee</li>
-                    <li className = {category === "Burger" ? "active" : ""} onClick={() => categoryHandler("Burger")}>Burger</li>
-                    <li className = {category === "Side" ? "active" : ""} onClick={() => categoryHandler("Side")}>Side</li> */}
-           
-        </TabContainer>
-    )
-}
+   return (
+       <TabContainer>
+           <ul>
+               {categories.map((cate) => (
+                   <li key={cate} className={category === cate ? "active" : ""} onClick={() => categoryHandler(cate)}>{cate}</li>
+               ))}
+           </ul>
+       </TabContainer>
+   );
+};
 
 export default TabMenu;
