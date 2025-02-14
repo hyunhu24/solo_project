@@ -29,10 +29,10 @@ export const Register = () => {
 
   return (
     <form onSubmit={handleSubmit} style={{marginTop:"150px"}}>
-        <input name="email" type="email" placeholder="이메일" required />
+        <input name="email" defaultValue="@test.com" type="email" placeholder="이메일" required />
         <input name="password" type="password" placeholder="비밀번호" required />
-        <input name="name" type="text" placeholder="닉네임" required />
-        <input name="phone" type="text" placeholder="전화번호" required />
+        <input name="name" defaultValue="test1" type="text" placeholder="닉네임" required />
+        <input name="phone" defaultValue="010-1111-1111" type="text" placeholder="전화번호" required />
         <button type="submit">회원가입</button>
     </form>
   );

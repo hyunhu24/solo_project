@@ -14,18 +14,24 @@ export const CategoryProvider = ({ children }) => {
   );
 };
 
-
 // import React, { createContext, useState } from "react";
 
-// export const CategoryContext = createContext();
+// export const CategoryContext = createContext({
+//   category: "defaultCategory", // 초기값 설정
+//   setCategory: () => {},
+// });
 
-// // 카테고리 상태와 업데이트 전역 관리 위해 생성성
-// export const CategoryProvider = ({children}) => {
-//     const [category, setCategory] = useState("All");
+// export const CategoryProvider = ({ children }) => {
+//   const [category, setCategory] = useState("defaultCategory");
 
-//     return(
-//         <CategoryContext.Provider value={{category, setCategory}}>
-//             {children}
-//         </CategoryContext.Provider>
-//     )
-// }
+//   const value = {
+//     category,
+//     setCategory,
+//   };
+
+//   return (
+//     <CategoryContext.Provider value={value}>
+//       {children}
+//     </CategoryContext.Provider>
+//   );
+// };
